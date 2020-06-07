@@ -1,0 +1,43 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "dochiro94/multi-client",
+            "hostname": "client",
+            "memory": 128,
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "dochiro94/multi-nginx",
+            "hostname": "nginx",
+            "memory": 128,
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [
+                "client",
+                "server"
+            ]
+        },
+        {
+            "name": "server",
+            "image": "dochiro94/multi-server",
+            "hostname": "api",
+            "memory": 128,
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "dochiro94/multi-worker",
+            "hostname": "worker",
+            "memory": 128,
+            "essential": false
+        }
+    ]
+}
